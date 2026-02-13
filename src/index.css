@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Inter', sans-serif;
+  --font-accent: 'Cormorant Garamond', serif;
+
+  --color-primary: #1A2F25;
+  --color-primary-light: #2C4A3B;
+  --color-secondary: #F9F8F4;
+  --color-accent: #D4AF37;
+  --color-accent-hover: #c5a028;
+  --color-text: #333333;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 120px;
+    @apply antialiased;
+  }
+  
+  body {
+    @apply bg-secondary text-text;
+  }
+
+  a, button {
+    cursor: pointer;
+  }
+}
