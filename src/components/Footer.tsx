@@ -75,14 +75,7 @@ export const Footer = () => {
             © {new Date().getFullYear()} Patin Tempoyak Kak Zee. All rights reserved.
           </p>
           
-          <div className="flex gap-6">
-            <a href="#" className="text-gray-400 hover:text-accent transition-colors cursor-pointer">
-              <Facebook size={20} />
-            </a>
-            <a href="#" className="text-gray-400 hover:text-accent transition-colors cursor-pointer">
-              <Instagram size={20} />
-            </a>
-          </div>
+          
         </div>
       </div>
     </footer>
