@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
+import { useState } from 'react';
+import { useScroll, useMotionValueEvent } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { Button } from './ui/Button';
 

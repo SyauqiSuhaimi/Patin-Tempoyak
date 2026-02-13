@@ -1,7 +1,5 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { Moon, Calendar, Clock } from 'lucide-react';
-import { Button } from './ui/Button';
 
 export const RamadhanPromo = () => {
   return (
