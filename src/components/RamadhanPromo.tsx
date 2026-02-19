@@ -1,7 +1,10 @@
 import { motion } from 'framer-motion';
 import { Moon, Calendar, Clock } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 export const RamadhanPromo = () => {
+  const { t } = useLanguage();
+
   return (
     <section className="py-20 bg-gradient-to-br from-primary via-primary-light to-primary text-white relative overflow-hidden">
       {/* Decorative localized Islamic-style pattern vibe using CSS shapes */}
@@ -19,29 +22,28 @@ export const RamadhanPromo = () => {
           >
             <div className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full text-accent text-sm font-bold uppercase tracking-wider mb-2">
               <Moon size={16} className="fill-accent" />
-              Ramadhan Special
+              {t.ramadhanPromo.badge}
             </div>
             
             <h2 className="text-4xl md:text-6xl font-serif font-bold leading-tight">
-              Berbuka with <br />
-              <span className="text-accent italic">Authentic Flavors</span>
+              {t.ramadhanPromo.titleLine1} <br />
+              <span className="text-accent italic">{t.ramadhanPromo.titleAccent}</span>
             </h2>
             
             <p className="text-gray-300 text-lg max-w-xl mx-auto md:mx-0 leading-relaxed">
-              Experience the comfort of heavy, delicious Patin Tempoyak for your Iftar. 
-              We are open exclusively for <strong>Takeaway</strong> during this holy month.
+              {t.ramadhanPromo.description}
             </p>
 
             <div className="grid grid-cols-2 gap-4 max-w-md mx-auto md:mx-0">
                <div className="bg-white/5 p-4 rounded-lg flex flex-col items-center md:items-start border border-white/10">
                  <Clock className="text-accent mb-2" size={24} />
-                 <span className="text-xs text-gray-400 uppercase">Hours</span>
-                 <span className="font-bold text-lg">4PM - 7:30PM</span>
+                 <span className="text-xs text-gray-400 uppercase">{t.ramadhanPromo.hoursLabel}</span>
+                 <span className="font-bold text-lg">{t.ramadhanPromo.hoursValue}</span>
                </div>
                <div className="bg-white/5 p-4 rounded-lg flex flex-col items-center md:items-start border border-white/10">
                  <Calendar className="text-accent mb-2" size={24} />
-                 <span className="text-xs text-gray-400 uppercase">Availability</span>
-                 <span className="font-bold text-lg">Takeaway Only</span>
+                 <span className="text-xs text-gray-400 uppercase">{t.ramadhanPromo.availabilityLabel}</span>
+                 <span className="font-bold text-lg">{t.ramadhanPromo.availabilityValue}</span>
                </div>
             </div>
 
@@ -58,11 +60,11 @@ export const RamadhanPromo = () => {
              <div className="relative rounded-t-full rounded-b-lg overflow-hidden border-4 border-accent shadow-2xl mx-auto w-full max-w-sm aspect-[3/4]">
                <img 
                  src="/0.jpg" 
-                 alt="Patin Tempoyak Iftar" 
+                 alt={t.ramadhanPromo.imageAlt}
                  className="w-full h-full object-cover"
                />
                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end justify-center pb-8">
-                 <p className="font-serif text-2xl italic text-white">Perfect for Iftar</p>
+                 <p className="font-serif text-2xl italic text-white">{t.ramadhanPromo.imageCaption}</p>
                </div>
              </div>
           </motion.div>

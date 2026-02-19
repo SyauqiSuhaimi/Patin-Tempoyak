@@ -1,34 +1,24 @@
 import { motion } from 'framer-motion';
+import { useLanguage } from '../context/LanguageContext';
 
-const dishes = [
-  {
-    id: 1,
-    name: "Patin Tempoyak",
-    description: "Silver catfish cooked in a rich, tangy fermented durian broth. A Pahang signature.",
-    price: "RM 28.90",
-    image: "/0.jpg",
-    tags: ["Signature", "Spicy", "Authentic"]
-  },
-  {
-    id: 2,
-    name: "Ayam Penyet",
-    description: "Smashed fried chicken served with spicy sambal, tempeh, tofu, and fresh ulam.",
-    price: "RM 22.90",
-    image: "/00.jpg",
-    tags: ["Popular", "Crispy", "Spicy"]
-  }
-];
+const dishImages = ['/0.jpg', '/00.jpg'];
 
 export const Menu = () => {
+  const { t } = useLanguage();
+  const dishes = t.menu.dishes.map((dish, index) => ({
+    ...dish,
+    image: dishImages[index],
+  }));
+
   return (
     <section id="menu" className="py-24 bg-primary text-white relative">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <span className="text-accent font-accent text-xl tracking-widest uppercase block mb-4">
-            Chef's Selection
+            {t.menu.eyebrow}
           </span>
           <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">
-            Signature Dishes
+            {t.menu.title}
           </h2>
           <div className="w-24 h-1 bg-accent mx-auto" />
         </div>

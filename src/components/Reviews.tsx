@@ -1,46 +1,18 @@
 import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Quote, Star } from 'lucide-react';
-
-const reviews = [
-  {
-    id: 1,
-    name: "King Ghaz",
-    source: "Google Reviews",
-    text: "Nice and affordable. The Patin Tempoyak is authentic and the flavor is spot on.",
-    rating: 5,
-  },
-  {
-    id: 2,
-    name: "Fairul Fauzi",
-    source: "Google Reviews",
-    text: "Best food experience here, calm atmosphere. Highly recommended for family dining.",
-    rating: 5,
-  },
-  {
-    id: 3,
-    name: "Hazwan Jaafar",
-    source: "Google Reviews",
-    text: "If u starving this is a right place for food hunters ..halal n delicious...bon appetit",
-    rating: 5,
-  },
-  {
-    id: 4,
-    name: "Sarah Lim",
-    source: "Google Reviews",
-    text: "The Ayam Penyet is a must-try! Crispy, juicy, and the sambal kicks!",
-    rating: 5,
-  }
-];
+import { useLanguage } from '../context/LanguageContext';
 
 export const Reviews = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const { t } = useLanguage();
+  const reviews = t.reviews.items;
 
   return (
     <section id="reviews" className="py-24 bg-secondary overflow-hidden">
       <div className="container mx-auto px-6 mb-12">
         <h2 className="text-4xl md:text-5xl font-serif font-bold text-center text-primary mb-4">
-          Voice of Guests
+          {t.reviews.title}
         </h2>
       </div>
 

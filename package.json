@@ -1,7 +1,7 @@
 {
-  "name": "premium",
+  "name": "patin-tempoyak-website",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -15,6 +15,7 @@
     "@tailwindcss/vite": "^4.1.18",
     "autoprefixer": "^10.4.24",
     "clsx": "^2.1.1",
+    "flag-icons": "^7.5.0",
     "framer-motion": "^12.34.0",
     "lucide-react": "^0.563.0",
     "react": "^19.2.0",
