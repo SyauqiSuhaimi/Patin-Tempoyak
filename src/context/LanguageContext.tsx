@@ -1,8 +1,19 @@
-import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
-import { translations, type Language, type TranslationContent } from '../i18n/translations';
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+  type ReactNode,
+} from "react";
+import {
+  translations,
+  type Language,
+  type TranslationContent,
+} from "../i18n/translations";
 
-const LANGUAGE_STORAGE_KEY = 'ptkz_language';
-const GEO_IP_ENDPOINT = 'https://ipwho.is/?fields=country_code';
+const LANGUAGE_STORAGE_KEY = "ptkz_language";
+const GEO_IP_ENDPOINT = "https://ipwho.is/?fields=country_code";
 
 type LanguageContextValue = {
   language: Language;
@@ -11,53 +22,66 @@ type LanguageContextValue = {
   t: TranslationContent;
 };
 
-const LanguageContext = createContext<LanguageContextValue | undefined>(undefined);
+const LanguageContext = createContext<LanguageContextValue | undefined>(
+  undefined,
+);
 
-const getInitialLanguage = (): { language: Language; autoDetected: boolean } => {
-  if (typeof window === 'undefined') {
-    return { language: 'en', autoDetected: false };
+const getInitialLanguage = (): {
+  language: Language;
+  autoDetected: boolean;
+} => {
+  if (typeof window === "undefined") {
+    return { language: "ms", autoDetected: false };
   }
 
-  const queryLanguage = new URLSearchParams(window.location.search).get('lang');
-  if (queryLanguage === 'en' || queryLanguage === 'ms') {
+  const queryLanguage = new URLSearchParams(window.location.search).get("lang");
+  if (queryLanguage === "en" || queryLanguage === "ms") {
     return { language: queryLanguage, autoDetected: false };
   }
 
   const storedLanguage = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
-  if (storedLanguage === 'en' || storedLanguage === 'ms') {
+  if (storedLanguage === "en" || storedLanguage === "ms") {
     return { language: storedLanguage, autoDetected: false };
   }
 
-  const browserLanguage = window.navigator.language.toLowerCase().startsWith('ms') ? 'ms' : 'en';
+  const browserLanguage = window.navigator.language
+    .toLowerCase()
+    .startsWith("ms")
+    ? "ms"
+    : "en";
   return { language: browserLanguage, autoDetected: true };
 };
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const initialLanguageState = getInitialLanguage();
-  const [language, setLanguageState] = useState<Language>(initialLanguageState.language);
-  const [autoDetected, setAutoDetected] = useState(initialLanguageState.autoDetected);
+  const [language, setLanguageState] = useState<Language>(
+    initialLanguageState.language,
+  );
+  const [autoDetected, setAutoDetected] = useState(
+    initialLanguageState.autoDetected,
+  );
 
   const setLanguage = (nextLanguage: Language) => {
     setAutoDetected(false);
     setLanguageState(nextLanguage);
 
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       const url = new URL(window.location.href);
-      url.searchParams.set('lang', nextLanguage);
-      window.history.replaceState({}, '', url);
+      url.searchParams.set("lang", nextLanguage);
+      window.history.replaceState({}, "", url);
     }
   };
 
   const toggleLanguage = () => {
-    setLanguage(language === 'en' ? 'ms' : 'en');
+    setLanguage(language === "en" ? "ms" : "en");
   };
 
   useEffect(() => {
-    document.documentElement.lang = language === 'ms' ? 'ms-MY' : 'en';
+    document.documentElement.lang = language === "ms" ? "ms-MY" : "en";
   }, [language]);
 
   useEffect(() => {
-    if (autoDetected || typeof window === 'undefined') {
+    if (autoDetected || typeof window === "undefined") {
       return;
     }
 
@@ -65,7 +89,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   }, [autoDetected, language]);
 
   useEffect(() => {
-    if (!autoDetected || typeof window === 'undefined') {
+    if (!autoDetected || typeof window === "undefined") {
       return;
     }
 
@@ -75,7 +99,9 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
 
     const resolveCountryLanguage = async () => {
       try {
-        const response = await fetch(GEO_IP_ENDPOINT, { signal: controller.signal });
+        const response = await fetch(GEO_IP_ENDPOINT, {
+          signal: controller.signal,
+        });
         if (!response.ok) {
           return;
         }
@@ -85,7 +111,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
           return;
         }
 
-        const geoLanguage = data.country_code === 'MY' ? 'ms' : 'en';
+        const geoLanguage = data.country_code === "MY" ? "ms" : "en";
         setLanguageState(geoLanguage);
         setAutoDetected(false);
       } catch {
@@ -111,17 +137,21 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
       toggleLanguage,
       t: translations[language],
     }),
-    [language]
+    [language],
   );
 
-  return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
+  return (
+    <LanguageContext.Provider value={value}>
+      {children}
+    </LanguageContext.Provider>
+  );
 };
 
 export const useLanguage = () => {
   const context = useContext(LanguageContext);
 
   if (!context) {
-    throw new Error('useLanguage must be used within LanguageProvider');
+    throw new Error("useLanguage must be used within LanguageProvider");
   }
 
   return context;
