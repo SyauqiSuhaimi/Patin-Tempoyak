@@ -1,12 +1,12 @@
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
-import { RamadhanPromo } from "./components/RamadhanPromo";
+// import { RamadhanPromo } from "./components/RamadhanPromo";
 import { About } from "./components/About";
 import { Menu } from "./components/Menu";
 import { Gallery } from "./components/Gallery";
 import { Reviews } from "./components/Reviews";
 import { Footer } from "./components/Footer";
-import { SeasonalBanner } from "./components/SeasonalBanner";
+// import { SeasonalBanner } from "./components/SeasonalBanner";
 import { SeoHead } from "./components/SeoHead";
 
 function App() {
